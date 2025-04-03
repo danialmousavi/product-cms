@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react'
 import './ProductsTable.css'
 import DeleteModal from '../DeleteModal/DeleteModal';
 import DetailModal from '../DetailModal/DetailModal';
+import EditModal from '../EditModal/EditModal';
+import { IoPricetagOutline } from "react-icons/io5";
+
 export default function ProductsTable() {
     //state for delete modal
     const [showDeleteModal,setShowDeleteModal]=useState(false);
     //state for detail modal
     const [showDetailModal,setShowDetailModal]=useState(false)
     //فانکشن برای اگر مدال حذف تایید شد 
+    const [showEditModal,setShowEditModal]=useState(false)
+
     const deleteModalSubmitAction=()=>{
         setShowDeleteModal(false);
         console.log('محصول حذف شد');
@@ -22,6 +27,11 @@ export default function ProductsTable() {
     //فانکشن برای بستن مدال جزییات
    const CloseDetailModal=()=>{
     setShowDetailModal(false)
+   }
+
+   const updateProductInfos=()=>{
+    console.log('products infos updated');
+    
    }
   return (
     <>
@@ -45,7 +55,7 @@ export default function ProductsTable() {
                 <td>
                     <button className='products-table-btn' onClick={()=>setShowDetailModal(true)}>جزییات</button>
                     <button className='products-table-btn' onClick={()=>setShowDeleteModal(true)}>حذف</button>
-                    <button className='products-table-btn'>ویرایش</button>
+                    <button className='products-table-btn' onClick={()=>setShowEditModal(true)}>ویرایش</button>
                 </td>
             </tr>
             </tbody>
@@ -53,6 +63,32 @@ export default function ProductsTable() {
         </table>
         {showDeleteModal&&<DeleteModal submitAction={deleteModalSubmitAction} cancelAction={deleteModalCancelAction}/>}
         {showDetailModal&&<DetailModal onHide={CloseDetailModal}/>}
+        {showEditModal&&<EditModal onSubmit={updateProductInfos} onClose={()=>setShowEditModal(false)}>
+            <div className='edit-products-form-group'>
+                <span>
+                    <IoPricetagOutline/>
+                </span>
+                <input type="text" className='edit-product-input' placeholder='عنوان جدید را وارد' />
+            </div>
+            <div className='edit-products-form-group'>
+                <span>
+                    <IoPricetagOutline/>
+                </span>
+                <input type="text" className='edit-product-input' placeholder='عنوان جدید را وارد' />
+            </div>
+            <div className='edit-products-form-group'>
+                <span>
+                    <IoPricetagOutline/>
+                </span>
+                <input type="text" className='edit-product-input' placeholder='عنوان جدید را وارد' />
+            </div>
+            <div className='edit-products-form-group'>
+                <span>
+                    <IoPricetagOutline/>
+                </span>
+                <input type="text" className='edit-product-input' placeholder='عنوان جدید را وارد' />
+            </div>
+        </EditModal>}
     </>
 )
 }
