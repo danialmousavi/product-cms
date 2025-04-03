@@ -28,4 +28,5 @@
     color: var(--white);
     background-color: var(--blue);
     margin-right: 20px;
+    cursor: pointer;
 }

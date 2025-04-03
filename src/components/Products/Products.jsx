@@ -9,7 +9,6 @@ export default function Products() {
     <AddNewProducts/>
     <ProductsTable/>
     <Errorbox msg='هیچ محصولی یافت نشد'/>
-
     </>
   )
 }
