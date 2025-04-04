@@ -47,7 +47,7 @@ export default function ProductsTable() {
             <tbody>
             <tr className='products-table-tr'>
                 <td>
-                    <img src="/images/oil.png" alt="" className='products-table-img' />
+                    <img src="/img/oil.jpeg" alt="" className='products-table-img' />
                 </td>
                 <td>روغن لادن</td>
                 <td>90000</td>

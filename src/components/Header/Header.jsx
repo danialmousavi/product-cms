@@ -8,7 +8,7 @@ export default function Header() {
     <>
     <div className="header">
         <div className='admin-profile'>
-            <img src="/images/piter.png" alt="" />
+            <img src="/img/saeedi.jpeg" alt="" />
             <div>
             <h1>دانیال موسوی</h1>
             <h3>برنامه نویس فزانت اند</h3>
