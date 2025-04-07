@@ -148,7 +148,7 @@ CREATE TABLE `products` (
   `colors` int(100) NOT NULL,
   `productDesc` text COLLATE utf8_persian_ci NULL,
   `url` varchar(100) COLLATE utf8_persian_ci NULL,
-  `categoryID` int(100) NOT NULL
+  `categoryID` int(100) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
