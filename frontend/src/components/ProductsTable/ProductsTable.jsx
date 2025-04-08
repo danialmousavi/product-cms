@@ -7,7 +7,7 @@ import { IoPricetagOutline } from "react-icons/io5";
 import Errorbox from '../Errorbox/Errorbox';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import { RxCross1, RxOpenInNewWindow } from 'react-icons/rx';
-export default function ProductsTable() {
+export default function ProductsTable({getAllProducts,products}) {
     //state for delete modal
     const [showDeleteModal,setShowDeleteModal]=useState(false);
     //state for detail modal
@@ -15,7 +15,7 @@ export default function ProductsTable() {
     //فانکشن برای اگر مدال حذف تایید شد 
     const [showEditModal,setShowEditModal]=useState(false)
 
-    const [products,setProducts]=useState([]);
+    
     //ذخیره آیدی محصول
     const [productId,setProductId]=useState(null);
 
@@ -32,9 +32,7 @@ const [newSale,setNewSale]=useState('')
 const [newColors,setNewColors]=useState('')
 
     //fetch data from backend
-   const getAllProducts=()=>{
-    fetch('http://localhost:3000/api/products').then(res=>res.json()).then(data=>setProducts(data))       
-   }
+
      useEffect(()=>{
         getAllProducts();
      },[])

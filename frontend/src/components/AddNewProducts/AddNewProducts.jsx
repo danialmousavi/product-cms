@@ -7,8 +7,8 @@ import { MdDriveFileRenameOutline } from "react-icons/md";
 import { LuPaintbrush } from "react-icons/lu";
 import { LuMessageCircleHeart } from "react-icons/lu";
 import { FaChartLine } from "react-icons/fa6";
-
-export default function AddNewProducts() {
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+export default function AddNewProducts({getAllProducts}) {
 const [newProductTitle,SetNewProductTitle]=useState('');
 const [newProductPrice,SetNewProductPrice]=useState('');
 const [newProductCount,SetNewProductCount]=useState('');
@@ -16,7 +16,7 @@ const [newProductImg,SetNewProductImg]=useState('');
 const [newProductPopularity,SetNewProductPopularity]=useState('');
 const [newProductSale,SetNewProductSale]=useState('');
 const [newProductColors,SetNewProductColors]=useState('');
-
+const notify = () => toast("محصول با موفقیت اضافه شد!");
 const newProductObj={
     title:newProductTitle,
     price:newProductPrice,
@@ -41,6 +41,15 @@ const addNewProduct = (e) => {
             const data = await res.json();
             console.log("Product added successfully:", data);
             // Optionally update UI or state here
+            SetNewProductTitle('');
+            SetNewProductPrice('');
+            SetNewProductColors('');
+            SetNewProductCount('');
+            SetNewProductImg('');
+            SetNewProductPopularity('');
+            SetNewProductSale('');
+            notify();
+            getAllProducts();
         } else {
             const error = await res.text(); // or res.json() if your server sends JSON errors
             console.error("Failed to add product:", error);
@@ -89,6 +98,7 @@ const addNewProduct = (e) => {
 
         </form>
     </div>
+   
     </>
 )
 }
