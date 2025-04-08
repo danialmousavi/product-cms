@@ -9,17 +9,21 @@ export default function Comments() {
   const [mainCommentBody,setMainCommentBody]=useState('');
   const [isShowDeletModal,setIsShowDleteModal]=useState(false);
   const [commentId,setCommentId]=useState(null);
-
+  const [isShowEditModal,setIsShowEditModal]=useState(false);
+  //function for fetch data
   const getAllComments=()=>{
     fetch('http://localhost:3000/api/comments').then(res=>res.json()).then(data=>setAllComments(data))
   }
+  //fetch data
   useEffect(()=>{
     getAllComments();
   },[])
 
+  //function for cancel deleting comment
     const cancelDeleteCommentAction=()=>{
       setIsShowDleteModal(false)
     }
+    // function for deleting comments
     const submitDleteCommentAction=()=>{
       fetch(`http://localhost:3000/api/comments/${commentId}`,{
         method:"DELETE",
@@ -30,8 +34,21 @@ export default function Comments() {
       }
       )
       setIsShowDleteModal(false)
-      
-      
+    }
+
+    //edit comment
+    const handleUpdateComment=()=>{
+      fetch(`http://localhost:3000/api/comments/${commentId}`,{
+        method:'PUT',
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify({ body: mainCommentBody })
+      }).then(res=>res.json()).then(data=>{
+        console.log(data);
+        setIsShowEditModal(false);
+        getAllComments();
+      })
     }
   return (
     <>
@@ -66,7 +83,11 @@ export default function Comments() {
                 setIsShowDleteModal(true);
                 setCommentId(comment.id)
               }}>حذف</button>
-              <button >ویرایش</button>
+              <button onClick={()=>{
+                setIsShowEditModal(true);
+                setMainCommentBody(comment.body);
+                setCommentId(comment.id)
+              }} >ویرایش</button>
               <button >پاسخ</button>
               <button >تایید</button>
             </td>
@@ -92,6 +113,17 @@ export default function Comments() {
     )}
     {isShowDeletModal&&(
       <DeleteModal cancelAction={cancelDeleteCommentAction} submitAction={submitDleteCommentAction}/>
+    )}
+    {isShowEditModal&&(
+      <DetailModal>
+        <div className='text-modal'>
+            <textarea className='text-area-edit-comment' name="" id="" value={mainCommentBody} onChange={(e)=>setMainCommentBody(e.target.value)}>
+              
+            </textarea>
+          <button className='text-modal-close-btn' onClick={handleUpdateComment}>آپدیت اطلاعات جدید</button>  
+
+        </div>
+      </DetailModal>
     )}
     </>
   )

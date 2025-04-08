@@ -18,3 +18,7 @@
     border-radius: 10px;
     cursor: pointer;
 }
+.text-area-edit-comment{
+    width: 80%;
+    outline: none;
+}
