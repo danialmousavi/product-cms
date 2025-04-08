@@ -6,7 +6,7 @@ const commentsRouter = express.Router();
 // routes
 
 commentsRouter.get("/", (req, res) => {
-  let selectAllCommentsQuery = `SELECT Comments.id, Comments.isAccept , Comments.body, Comments.date, Comments.hour, Users.firsname as userID, Products.title as productID FROM Comments INNER JOIN Users ON Users.id = Comments.userID INNER JOIN Products ON Products.id = Comments.productID`;
+  let selectAllCommentsQuery = `SELECT \`c\`.\`id\` , \`c\`.\`isAccept\` , \`c\`.\`body\` , \`c\`.\`date\` , \`c\`.\`hour\` , \`u\`.\`firstname\` AS 'userID' , \`p\`.\`title\` AS 'productID' , \`c\`.\`createdAt\` FROM \`comments\` \`c\` LEFT JOIN \`users\` \`u\` ON \`c\`.\`userID\` = \`u\`.\`id\` LEFT JOIN \`products\` \`p\` ON \`c\`.\`productID\` = \`p\`.\`id\` ORDER BY \`c\`.\`createdAt\` DESC`;
 
   SabzLearnShopDB.query(selectAllCommentsQuery, (err, result) => {
     if (err) {
