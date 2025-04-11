@@ -42,7 +42,6 @@ export default function Users() {
       getAllUsers()
     })
   }
-  console.log(allUsers);
   
   //updating user
   const closeUserEdit=()=>{

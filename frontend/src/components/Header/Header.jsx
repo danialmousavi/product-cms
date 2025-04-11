@@ -8,7 +8,7 @@ export default function Header() {
     <>
     <div className="header">
         <div className='admin-profile'>
-            <img src="/img/saeedi.jpeg" alt="" />
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQFwYCgMKq_qYQ/profile-displayphoto-shrink_400_400/B4DZUazeMnHkAk-/0/1739911457755?e=1749686400&v=beta&t=fUdN1a3mSGWTSy9FqKl02KXxySwWXsPZrIp9ba65JB8" alt="" />
             <div>
             <h1>دانیال موسوی</h1>
             <h3>برنامه نویس فزانت اند</h3>
