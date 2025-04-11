@@ -56,7 +56,7 @@ export default function Comments() {
       <h1 className='cms-title'>لیست کامنت ها</h1>
     {allComments.length?(
       <>
-            <table className='cms-table'>
+      <table className='cms-table'>
         <thead>
           <tr>
             <th>اسم کاربر</th>

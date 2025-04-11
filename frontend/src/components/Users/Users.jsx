@@ -5,11 +5,15 @@ import EditModal from '../EditModal/EditModal';
 import { ImCross } from "react-icons/im";
 import { FaUser } from "react-icons/fa";
 import './Users.css'
+import DetailModal from '../DetailModal/DetailModal';
+import { RxCross1 } from 'react-icons/rx';
 export default function Users() {
   const [allUsers,setAllUsers]=useState([]);
   const [showDeleteModal,setShowDeleteMOdal]=useState(false);
   const [userId,setUserId]=useState(null);
   const [showEditUser,SetShowEditUser]=useState(false);
+  const [IsShowdetailModal,setIsShowDetailModal]=useState(false);
+  const [mainProductInfo,setMainProductInfo]=useState(null)
 
   const [newFirstName,setNewFirstName]=useState('');
   const [newLastName,setNewLastName]=useState('');
@@ -45,7 +49,7 @@ export default function Users() {
     SetShowEditUser(false)
   }
   const newUserDatas={
-    firstname:newFirstName,
+    firsname:newFirstName,
     lastname: newLastName,
     username: newUserName,
     password: newPassword,
@@ -70,6 +74,9 @@ export default function Users() {
       getAllUsers();      
     })
   }
+
+  //detail modal
+  const CloseDetailModal=()=>setIsShowDetailModal(false)
   return (
     <>
     <div className='cms-main'>
@@ -99,7 +106,10 @@ export default function Users() {
                 setShowDeleteMOdal(true);
                 setUserId(user.id)
                }}>حذف</button>
-               <button>جزییات</button>
+               <button onClick={()=>{
+                setIsShowDetailModal(true);
+                setMainProductInfo(user);
+               }}>جزییات</button>
                <button onClick={()=>{
                 setNewFirstName(user.firstname);
                 setNewLastName(user.lastname);
@@ -128,6 +138,36 @@ export default function Users() {
     {showDeleteModal&&(
       <DeleteModal cancelAction={cancelDeleteUser} submitAction={submitDleteUser}/>
     )}
+
+    {IsShowdetailModal&&(
+      <DetailModal>
+          <table className='cms-table'>
+      
+            <thead>
+            <div className='close-cms-table' onClick={CloseDetailModal}>
+                <RxCross1/>
+            </div>
+              <tr>
+                <th>نام کاربری</th>
+                <th>آدرس</th>
+                <th>امتیاز</th>
+                <th>میزان خرید</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{mainProductInfo.username}</td>
+                <td>{mainProductInfo.address}</td>
+                <td>{mainProductInfo.score}</td>
+                <td>{mainProductInfo.buy}</td>
+              </tr>
+            </tbody>
+          </table>
+      </DetailModal>
+    )}
+
+
+
     {showEditUser&&(
       <EditModal onSubmit={updateEditUser} onClose={closeUserEdit}>
           <div className='edit-user-info-input-group'>
